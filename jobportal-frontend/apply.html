@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Job | CareerNest</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .apply-page {
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 24px;
+        }
+
+        .apply-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .apply-card h1 {
+            color: #183153;
+            margin-bottom: 8px;
+        }
+
+        .job-summary {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 24px 0;
+        }
+
+        .apply-form {
+            display: grid;
+            gap: 16px;
+        }
+
+        .apply-form label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .apply-form input,
+        .apply-form textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            border: 1px solid #ccd3df;
+            border-radius: 8px;
+            font: inherit;
+        }
+
+        .apply-form button {
+            background: #2446a8;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #pageMessage {
+            margin-top: 16px;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+<body>
+    <main class="apply-page">
+        <div class="apply-card">
+            <h1>Apply for Job</h1>
+            <p>Review the job details and submit your application.</p>
+
+            <section class="job-summary">
+                <h2 id="jobTitle">Loading job...</h2>
+                <p id="companyName"></p>
+                <p id="jobLocation"></p>
+                <p id="jobType"></p>
+                <p id="jobDescription"></p>
+            </section>
+
+            <form id="applicationForm" class="apply-form">
+                <div>
+                    <label for="fullName">Full Name</label>
+                    <input id="fullName" required>
+                </div>
+
+                <div>
+                    <label for="email">Email Address</label>
+                    <input id="email" type="email" required>
+                </div>
+
+                <div>
+                    <label for="coverLetter">Why are you suitable for this job?</label>
+                    <textarea id="coverLetter" rows="5"
+                        placeholder="Write a short introduction..."></textarea>
+                </div>
+
+                <button id="submitApplication" type="submit">
+                    Submit Application
+                </button>
+            </form>
+
+            <p id="pageMessage" role="status"></p>
+        </div>
+    </main>
+
+    <script src="apply.js"></script>
+</body>
+</html>

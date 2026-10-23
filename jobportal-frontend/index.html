@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover jobs, internships and career opportunities.">
+    <title>CareerNest | Find Your Next Opportunity</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <a class="logo" href="#">Career<span>Nest</span></a>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#jobs">Find Jobs</a>
+    <a href="#post-job">Post a Job</a>
+</nav>
+
+<div class="nav-actions">
+    <button id="loginButton" class="outline-button" type="button">
+        Login
+    </button>
+    <button id="signupButton" class="nav-button" type="button">
+        Sign Up
+    </button>
+</div>
+
+</header>
+
+    <main>
+        
+<!-- Login and Signup Section--- -->
+<section id="authSection" class="auth-section" hidden>
+    <div class="auth-card">
+
+        <button id="closeAuthButton" class="auth-close"
+                type="button" aria-label="Close form">✕</button>
+
+        <a class="logo auth-logo" href="#home">Career<span>Nest</span></a>
+
+        <div class="auth-tabs">
+            <button id="loginTab" class="auth-tab active" type="button">
+                Login
+            </button>
+            <button id="signupTab" class="auth-tab" type="button">
+                Sign Up
+            </button>
+        </div>
+
+        <h2 id="authTitle">Welcome back!</h2>
+        <p id="authDescription">Login to continue your career journey.</p>
+
+        <form id="authForm">
+            <div id="fullNameGroup" hidden>
+                <label for="authFullName">Full name</label>
+                <input id="authFullName" type="text"
+                       placeholder="Enter your full name"
+                       maxlength="120">
+            </div>
+
+            <label for="authEmail">Email address</label>
+            <input id="authEmail" type="email"
+                   placeholder="you@example.com" required>
+
+            <label for="authPassword">Password</label>
+            <input id="authPassword" type="password"
+                   placeholder="Enter your password"
+                   minlength="8" maxlength="72" required>
+
+            <button id="authSubmitButton"
+                    class="primary-button full-button"
+                    type="submit">
+                Login →
+            </button>
+
+            <p id="authMessage" class="status-message"
+               role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="auth-switch">
+            <span id="authSwitchText">New to CareerNest?</span>
+            <button id="authSwitchButton" type="button">Create account</button>
+        </p>
+
+    </div>
+</section>
+<!-- End Login and Signup Section -->
+
+
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <span class="eyebrow">YOUR NEXT CHAPTER STARTS HERE</span>
+
+                <h1>Find work that<br> <span>moves you forward.</span></h1>
+
+                <p>
+                    Explore exciting jobs, discover new opportunities,
+                    and take the next step in your career.
+                </p>
+
+                <form id="searchForm" class="search-box">
+                    <div class="search-field">
+                        <label for="searchInput">What are you looking for?</label>
+                        <input id="searchInput" type="text"
+                               placeholder="Job title, skill or location">
+                    </div>
+                    <button class="primary-button" type="submit">Find Jobs →</button>
+                </form>
+
+                <p class="hero-note">Explore internships, full-time roles and more.</p>
+            </div>
+
+            <div class="hero-art" aria-hidden="true">
+                <div class="art-circle"></div>
+                <div class="floating-card card-one">
+                    <span class="card-icon">💼</span>
+                    <div>
+                        <strong>New opportunities</strong>
+                        <small>Your next role awaits</small>
+                    </div>
+                </div>
+                <div class="floating-card card-two">
+                    <span class="check-icon">✓</span>
+                    <div>
+                        <strong>Career growth</strong>
+                        <small>One step at a time</small>
+                    </div>
+                </div>
+                <div class="art-center">CN</div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div>
+                <strong id="totalJobs">—</strong>
+                <span>Jobs available</span>
+            </div>
+            <div>
+                <strong>Career</strong>
+                <span>Opportunities for you</span>
+            </div>
+            <div>
+                <strong>One step</strong>
+                <span>Closer to your goals</span>
+            </div>
+        </section>
+
+        <section class="jobs-section" id="jobs">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">OPPORTUNITIES FOR YOU</span>
+                    <h2>Explore latest jobs</h2>
+                    <p>Find a role that matches your skills and ambitions.</p>
+                </div>
+                <button id="refreshButton" class="outline-button" type="button">
+                    ↻ Refresh jobs
+                </button>
+            </div>
+
+            <div class="filters">
+                <button class="filter-button active" data-type="ALL" type="button">All jobs</button>
+                <button class="filter-button" data-type="INTERNSHIP" type="button">Internships</button>
+                <button class="filter-button" data-type="FULL_TIME" type="button">Full time</button>
+                <button class="filter-button" data-type="PART_TIME" type="button">Part time</button>
+                <button class="filter-button" data-type="CONTRACT" type="button">Contract</button>
+            </div>
+
+            <p id="jobsMessage" class="status-message" role="status">
+                Connecting to the job database...
+            </p>
+
+            <div id="jobList" class="job-grid"></div>
+        </section>
+
+        <section class="post-section" id="post-job">
+            <div class="post-intro">
+                <span class="eyebrow">FOR EMPLOYERS</span>
+                <h2>Find your next great hire.</h2>
+                <p>
+                    Share an opportunity with candidates.
+                    Your submitted job will be saved to our job database.
+                </p>
+                <div class="post-benefit">✓ Simple job posting form</div>
+                <div class="post-benefit">✓ Job details saved in the database</div>
+                <div class="post-benefit">✓ New listing appears in job search</div>
+            </div>
+
+            <form id="jobForm" class="job-form">
+                <h3>Post a new job</h3>
+                <p class="form-description">Enter the details below.</p>
+
+                <label for="title">Job title *</label>
+                <input id="title" name="title" required maxlength="180"
+                       placeholder="e.g. Java Developer">
+
+                <label for="description">Job description *</label>
+                <textarea id="description" name="description" required
+                          placeholder="Describe the role and responsibilities"></textarea>
+
+                <label for="requirements">Requirements</label>
+                <textarea id="requirements" name="requirements"
+                          placeholder="Education, experience or qualifications"></textarea>
+
+                <label for="skills">Skills required</label>
+                <input id="skills" name="skills" placeholder="Java, SQL, Excel">
+
+                <div class="form-row">
+                    <div>
+                        <label for="location">Location *</label>
+                        <input id="location" name="location" required
+                               placeholder="e.g. Mumbai">
+                    </div>
+                    <div>
+                        <label for="openings">Open positions *</label>
+                        <input id="openings" name="openings" type="number"
+                               min="1" max="10000" value="1" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="employmentType">Employment type *</label>
+                        <select id="employmentType" name="employmentType" required>
+                            <option value="INTERNSHIP">Internship</option>
+                            <option value="FULL_TIME">Full time</option>
+                            <option value="PART_TIME">Part time</option>
+                            <option value="CONTRACT">Contract</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="workMode">Work mode *</label>
+                        <select id="workMode" name="workMode" required>
+                            <option value="HYBRID">Hybrid</option>
+                            <option value="ONSITE">Onsite</option>
+                            <option value="REMOTE">Remote</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="salaryMin">Minimum salary (₹)</label>
+                        <input id="salaryMin" name="salaryMin" type="number"
+                               min="0" step="0.01" placeholder="25000">
+                    </div>
+                    <div>
+                        <label for="salaryMax">Maximum salary (₹)</label>
+                        <input id="salaryMax" name="salaryMax" type="number"
+                               min="0" step="0.01" placeholder="40000">
+                    </div>
+                </div>
+
+                <label for="experienceMin">Minimum experience (years) *</label>
+                <input id="experienceMin" name="experienceMin" type="number"
+                       min="0" max="999" step="0.1" value="0" required>
+
+                <label for="deadline">Application deadline</label>
+                <input id="deadline" name="deadline" type="date">
+
+                <button type="submit" id="submitJobButton" class="primary-button full-button">
+                    Publish job →
+                </button>
+
+                <p id="formMessage" class="status-message" role="status"></p>
+            </form>
+        </section>
+
+        <section class="bottom-cta">
+            <div>
+                <span class="eyebrow">YOUR FUTURE IS WAITING</span>
+                <h2>Ready for your next opportunity?</h2>
+                <p>Explore the latest jobs and find your next step.</p>
+            </div>
+            <a href="#jobs" class="light-button">Explore jobs ↑</a>
+        </section>
+    </main>
+
+    <footer>
+        <a class="logo footer-logo" href="#home">Career<span>Nest</span></a>
+        <p>Connecting people with opportunities.</p>
+        <small>CareerNest · Learning project</small>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
