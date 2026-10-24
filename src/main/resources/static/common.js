@@ -709,8 +709,11 @@ async function mockApiFetch(path, options = {}) {
 }
 
 /**
- * Universal fetch wrapper:
- * Tries live backend first; if unavailable, falls back to local Interactive Demo Engine.
+ * Universal fetch wrapper. Every request goes to the Spring Boot backend so
+ * that data is saved in the MySQL job_portal database. If the server cannot be
+ * reached an error is shown; nothing is silently stored in the browser.
+ * (The offline demo engine runs only if localStorage "careerNestForceDemo" is
+ * set to "true" by hand, e.g. for a presentation without a server.)
  */
 async function apiFetch(path, options = {}) {
     const session = getSession();
@@ -728,45 +731,43 @@ async function apiFetch(path, options = {}) {
         return mockApiFetch(path, options);
     }
 
+    let response;
     try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 2000);
-
-        const response = await fetch(API_BASE + path, {
+        response = await fetch(API_BASE + path, {
             ...options,
             headers,
-            signal: controller.signal
+            // Generous limit: logins hash passwords and uploads can take a while
+            signal: AbortSignal.timeout(30000)
         });
-        clearTimeout(timeoutId);
-
-        isBackendAvailable = true;
-        updateConnectionBadge(true);
-
-        if (response.status === 401 && session) {
-            clearSession();
-            renderNavbar();
-        }
-
-        if (options.raw) {
-            if (!response.ok) {
-                const error = await response.json().catch(() => ({}));
-                throw new Error(error.message || "Request failed (" + response.status + ").");
-            }
-            return response;
-        }
-
-        const data = await response.json().catch(() => ({}));
-        if (!response.ok) {
-            throw new Error(data.message || "Request failed (" + response.status + ").");
-        }
-        return data;
     } catch (netErr) {
-        // Backend offline or unreachable -> switch to Mock Demo Engine seamlessly
         isBackendAvailable = false;
         updateConnectionBadge(false);
-        console.info("Notice: Live Spring Boot backend is offline. Running in interactive demo mode.", netErr.message);
-        return mockApiFetch(path, options);
+        console.error("CareerNest backend unreachable:", netErr);
+        throw new Error("Cannot reach the CareerNest server on port 8080, so nothing was saved. "
+            + "Start the Spring Boot backend and try again.");
     }
+
+    isBackendAvailable = true;
+    updateConnectionBadge(true);
+
+    if (response.status === 401 && session) {
+        clearSession();
+        renderNavbar();
+    }
+
+    if (options.raw) {
+        if (!response.ok) {
+            const error = await response.json().catch(() => ({}));
+            throw new Error(error.message || "Request failed (" + response.status + ").");
+        }
+        return response;
+    }
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+        throw new Error(data.message || "Request failed (" + response.status + ").");
+    }
+    return data;
 }
 
 // Visual status pill for live backend vs standalone interactive demo
@@ -788,13 +789,12 @@ function updateConnectionBadge(live) {
         badge.style.borderColor = "#a7f3d0";
         badge.style.background = "var(--green-bg)";
     } else {
-        badge.textContent = "✨ Demo Mode";
-        badge.title = "Spring Boot offline - running full interactive simulation. Click to test live connection.";
-        badge.onclick = () => {
-            localStorage.removeItem(DEMO_MODE_OVERRIDE_KEY);
-            alert("Testing live Spring Boot connection (port 8080)...");
-            window.location.reload();
-        };
+        badge.textContent = "🔴 Backend offline";
+        badge.title = "Spring Boot is not running on port 8080 – data cannot be saved. Click to retry.";
+        badge.style.color = "#b42318";
+        badge.style.borderColor = "#fecaca";
+        badge.style.background = "#fef2f2";
+        badge.onclick = () => window.location.reload();
     }
 }
 
@@ -811,11 +811,12 @@ function dashboardLabel(role) {
     return "My Profile";
 }
 
+// Sends the user to the login form unless they are logged in with this role
 function requireRole(role) {
     const session = getSession();
     if (!session?.token || session.role !== role) {
         alert("Please log in with the right account to open this page.");
-        window.location.href = "index.html";
+        window.location.href = "index.html#login";
         return null;
     }
     return session;
@@ -930,32 +931,6 @@ function renderNavbar() {
     }
 }
 
-// 1-Click Quick Demo Login Helper
-function quickLogin(role) {
-    const db = getDemoDB();
-    let user;
-    if (role === "STUDENT") {
-        user = db.users.find(u => u.email === "priya@example.test") || db.users[0];
-    } else if (role === "RECRUITER") {
-        user = db.users.find(u => u.email === "neha@example.test") || db.users[2];
-    } else if (role === "ADMIN") {
-        user = db.users.find(u => u.role === "ADMIN") || db.users[4];
-    }
-
-    if (user) {
-        saveSession({
-            token: "demo-jwt-token-" + user.id + "-" + Date.now(),
-            id: user.id,
-            email: user.email,
-            fullName: user.fullName,
-            role: user.role,
-            companyId: user.companyId || null,
-            companyName: user.companyName || null
-        });
-        window.location.href = dashboardFor(user.role);
-    }
-}
-
 function formatSalary(amount) {
     return new Intl.NumberFormat("en-IN", {
         style: "currency",
@@ -1013,6 +988,14 @@ async function downloadFile(path, fallbackName) {
     link.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
+
+// Sessions created by the old offline demo engine are not valid on the server
+(function discardFakeDemoSession() {
+    const session = getSession();
+    if (session?.token && String(session.token).startsWith("demo-jwt-token-")) {
+        clearSession();
+    }
+})();
 
 document.addEventListener("DOMContentLoaded", () => {
     renderNavbar();
