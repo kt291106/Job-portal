@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Discover jobs, internships and career opportunities.">
     <title>CareerNest | Find Your Next Opportunity</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 
@@ -16,17 +16,10 @@
 <nav>
     <a href="#home">Home</a>
     <a href="#jobs">Find Jobs</a>
-    <a href="#post-job">Post a Job</a>
+    <a href="#post-job">For Employers</a>
 </nav>
 
-<div class="nav-actions">
-    <button id="loginButton" class="outline-button" type="button">
-        Login
-    </button>
-    <button id="signupButton" class="nav-button" type="button">
-        Sign Up
-    </button>
-</div>
+<div class="nav-actions"></div>
 
 </header>
 
@@ -54,11 +47,51 @@
         <p id="authDescription">Login to continue your career journey.</p>
 
         <form id="authForm">
+            <div id="accountTypeGroup" class="account-type" hidden>
+                <span class="account-type-label">Choose your account type</span>
+                <label class="account-option">
+                    <input type="radio" name="accountType" value="STUDENT" checked>
+                    <span><strong>Job seeker</strong><small>Find jobs &amp; apply</small></span>
+                </label>
+                <label class="account-option">
+                    <input type="radio" name="accountType" value="COMPANY">
+                    <span><strong>Company</strong><small>Publish jobs &amp; see applicants</small></span>
+                </label>
+            </div>
+
             <div id="fullNameGroup" hidden>
-                <label for="authFullName">Full name</label>
+                <label for="authFullName" id="authFullNameLabel">Full name</label>
                 <input id="authFullName" type="text"
                        placeholder="Enter your full name"
                        maxlength="120">
+            </div>
+
+            <div id="companyFields" class="company-fields" hidden>
+                <label for="companyName">Company name *</label>
+                <input id="companyName" type="text" maxlength="180"
+                       placeholder="e.g. TechNova Solutions">
+
+                <label for="companyWebsite">Website</label>
+                <input id="companyWebsite" type="url" maxlength="255"
+                       placeholder="https://example.com">
+
+                <label for="companyIndustry">Industry</label>
+                <input id="companyIndustry" type="text" maxlength="120"
+                       placeholder="e.g. Information Technology">
+
+                <label for="companySize">Company size</label>
+                <select id="companySize">
+                    <option value="">Select size</option>
+                    <option>1-10</option>
+                    <option>11-50</option>
+                    <option>51-200</option>
+                    <option>201-1000</option>
+                    <option>1000+</option>
+                </select>
+
+                <label for="companyHeadquarters">Headquarters</label>
+                <input id="companyHeadquarters" type="text" maxlength="150"
+                       placeholder="e.g. Mumbai">
             </div>
 
             <label for="authEmail">Email address</label>
@@ -180,92 +213,35 @@
                 <span class="eyebrow">FOR EMPLOYERS</span>
                 <h2>Find your next great hire.</h2>
                 <p>
-                    Share an opportunity with candidates.
-                    Your submitted job will be saved to our job database.
+                    Register your company to publish jobs and review
+                    everyone who applies, with their full profile and resume.
                 </p>
-                <div class="post-benefit">✓ Simple job posting form</div>
-                <div class="post-benefit">✓ Job details saved in the database</div>
-                <div class="post-benefit">✓ New listing appears in job search</div>
+                <div class="post-benefit">✓ Only registered companies can publish jobs</div>
+                <div class="post-benefit">✓ See applicant details and resumes</div>
+                <div class="post-benefit">✓ Shortlist, interview or reject in one click</div>
             </div>
 
-            <form id="jobForm" class="job-form">
-                <h3>Post a new job</h3>
-                <p class="form-description">Enter the details below.</p>
-
-                <label for="title">Job title *</label>
-                <input id="title" name="title" required maxlength="180"
-                       placeholder="e.g. Java Developer">
-
-                <label for="description">Job description *</label>
-                <textarea id="description" name="description" required
-                          placeholder="Describe the role and responsibilities"></textarea>
-
-                <label for="requirements">Requirements</label>
-                <textarea id="requirements" name="requirements"
-                          placeholder="Education, experience or qualifications"></textarea>
-
-                <label for="skills">Skills required</label>
-                <input id="skills" name="skills" placeholder="Java, SQL, Excel">
-
-                <div class="form-row">
-                    <div>
-                        <label for="location">Location *</label>
-                        <input id="location" name="location" required
-                               placeholder="e.g. Mumbai">
-                    </div>
-                    <div>
-                        <label for="openings">Open positions *</label>
-                        <input id="openings" name="openings" type="number"
-                               min="1" max="10000" value="1" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div>
-                        <label for="employmentType">Employment type *</label>
-                        <select id="employmentType" name="employmentType" required>
-                            <option value="INTERNSHIP">Internship</option>
-                            <option value="FULL_TIME">Full time</option>
-                            <option value="PART_TIME">Part time</option>
-                            <option value="CONTRACT">Contract</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="workMode">Work mode *</label>
-                        <select id="workMode" name="workMode" required>
-                            <option value="HYBRID">Hybrid</option>
-                            <option value="ONSITE">Onsite</option>
-                            <option value="REMOTE">Remote</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div>
-                        <label for="salaryMin">Minimum salary (₹)</label>
-                        <input id="salaryMin" name="salaryMin" type="number"
-                               min="0" step="0.01" placeholder="25000">
-                    </div>
-                    <div>
-                        <label for="salaryMax">Maximum salary (₹)</label>
-                        <input id="salaryMax" name="salaryMax" type="number"
-                               min="0" step="0.01" placeholder="40000">
-                    </div>
-                </div>
-
-                <label for="experienceMin">Minimum experience (years) *</label>
-                <input id="experienceMin" name="experienceMin" type="number"
-                       min="0" max="999" step="0.1" value="0" required>
-
-                <label for="deadline">Application deadline</label>
-                <input id="deadline" name="deadline" type="date">
-
-                <button type="submit" id="submitJobButton" class="primary-button full-button">
-                    Publish job →
+            <div class="job-form employer-cta" id="employerGuest">
+                <h3>Hiring?</h3>
+                <p class="form-description">
+                    Create a company account, or log in to your company dashboard.
+                </p>
+                <button id="employerSignupButton" class="primary-button full-button" type="button">
+                    Register your company →
                 </button>
+                <button id="employerLoginButton" class="outline-button full-button" type="button">
+                    Company login
+                </button>
+            </div>
 
-                <p id="formMessage" class="status-message" role="status"></p>
-            </form>
+            <div class="job-form employer-cta" id="employerCompany" hidden>
+                <h3 id="employerCompanyName">Your company</h3>
+                <p class="form-description">
+                    Publish a new job or review the people who applied to your jobs.
+                </p>
+                <a class="primary-button full-button" href="company.html#post">Post a new job →</a>
+                <a class="outline-button full-button" href="company.html#applicants">View applicants</a>
+            </div>
         </section>
 
         <section class="bottom-cta">
@@ -284,6 +260,7 @@
         <small>CareerNest · Learning project</small>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="common.js?v=4"></script>
+    <script src="script.js?v=4"></script>
 </body>
 </html>

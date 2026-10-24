@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | CareerNest</title>
+    <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+    <header class="navbar">
+        <a class="logo" href="index.html">Career<span>Nest</span></a>
+        <nav>
+            <a href="index.html#jobs">All Jobs</a>
+            <a href="admin.html">Admin</a>
+        </nav>
+        <div class="nav-actions"></div>
+    </header>
+
+    <main class="page">
+        <div class="page-header">
+            <div>
+                <span class="eyebrow">ADMINISTRATION</span>
+                <h1>Admin panel</h1>
+                <p>Manage users, companies and job listings.</p>
+            </div>
+            <button id="refreshAll" class="outline-button" type="button">↻ Refresh</button>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card"><strong id="statStudents">—</strong><span>Job seekers</span></div>
+            <div class="stat-card"><strong id="statRecruiters">—</strong><span>Recruiters</span></div>
+            <div class="stat-card"><strong id="statCompanies">—</strong><span>Companies</span></div>
+            <div class="stat-card"><strong id="statJobs">—</strong><span>Jobs</span></div>
+            <div class="stat-card"><strong id="statApplications">—</strong><span>Applications</span></div>
+        </div>
+
+        <p id="adminMessage" class="status-message" role="status"></p>
+
+        <div class="tabs">
+            <button class="filter-button active" data-tab="usersTab" type="button">Users</button>
+            <button class="filter-button" data-tab="companiesTab" type="button">Companies</button>
+            <button class="filter-button" data-tab="jobsTab" type="button">Jobs</button>
+        </div>
+
+        <section id="usersTab" class="tab-panel panel">
+            <h2>Users</h2>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th></th></tr>
+                    </thead>
+                    <tbody id="usersTable"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="companiesTab" class="tab-panel panel" hidden>
+            <h2>Companies</h2>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>ID</th><th>Company</th><th>Industry</th><th>Headquarters</th><th>Recruiter</th><th>Jobs</th></tr>
+                    </thead>
+                    <tbody id="companiesTable"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="jobsTab" class="tab-panel panel" hidden>
+            <h2>Jobs</h2>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>ID</th><th>Job</th><th>Company</th><th>Status</th><th>Applicants</th><th></th></tr>
+                    </thead>
+                    <tbody id="jobsTable"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="common.js?v=4"></script>
+    <script src="admin.js?v=4"></script>
+</body>
+</html>
