@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apply for Job | CareerNest</title>
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
     <header class="navbar">
-        <a class="logo" href="index.html">Career<span>Nest</span></a>
+        <a class="logo" href="index.html">
+            <span class="logo-badge">CN</span>
+            Career<span>Nest</span>
+        </a>
         <nav>
             <a href="index.html#jobs">Find Jobs</a>
             <a href="profile.html">My Profile</a>
@@ -19,30 +22,30 @@
     <main class="page">
         <div class="page-header">
             <div>
-                <span class="eyebrow">APPLY</span>
-                <h1 id="jobTitle">Loading job...</h1>
+                <span class="eyebrow">JOB APPLICATION</span>
+                <h1 id="jobTitle">Loading role details...</h1>
                 <p id="companyName"></p>
             </div>
-            <a class="outline-button" href="index.html#jobs">← Back to jobs</a>
+            <a class="outline-button" href="index.html#jobs">← Back to all jobs</a>
         </div>
 
         <div class="two-columns">
             <section class="panel">
-                <h2>Job details</h2>
+                <h2>Job Overview</h2>
                 <div class="detail-grid" id="jobDetails"></div>
+                <h3 style="margin-top: 20px; font-size: 16px; color: var(--navy);">Role Description</h3>
                 <p id="jobDescription" class="cover-letter"></p>
                 <p id="jobRequirements" class="status-message"></p>
             </section>
 
             <form id="applicationForm" class="panel job-form" novalidate hidden>
-                <h2>Your application</h2>
-                <p class="hint">Fields marked * are required. Your details are saved to your
-                    profile and shared with the company along with your resume.</p>
+                <h2>Submit Your Application</h2>
+                <p class="hint">Fields marked with an asterisk (*) are required. Your details will be shared with the hiring company alongside your selected resume.</p>
 
-                <h3 class="form-section">1. Personal details</h3>
+                <h3 class="form-section">1. Personal Information</h3>
                 <div class="form-row">
                     <div>
-                        <label for="fullName">Full name</label>
+                        <label for="fullName">Full Name</label>
                         <input id="fullName" disabled>
                     </div>
                     <div>
@@ -51,43 +54,43 @@
                     </div>
                 </div>
 
-                <label for="phone">Phone number *</label>
+                <label for="phone">Phone Number *</label>
                 <input id="phone" required inputmode="tel" maxlength="16"
                        pattern="\+?[0-9]{10,15}" placeholder="9876543210">
 
-                <h3 class="form-section">2. Education &amp; skills</h3>
-                <label for="collegeName">College name *</label>
+                <h3 class="form-section">2. Academic Background &amp; Skills</h3>
+                <label for="collegeName">College / University *</label>
                 <input id="collegeName" required maxlength="180"
-                       placeholder="e.g. Example Engineering College">
+                       placeholder="e.g. National Institute of Technology">
 
                 <div class="form-row">
                     <div>
                         <label for="degree">Degree *</label>
-                        <input id="degree" required maxlength="120" placeholder="e.g. B.E.">
+                        <input id="degree" required maxlength="120" placeholder="e.g. B.Tech">
                     </div>
                     <div>
-                        <label for="branch">Branch / major *</label>
+                        <label for="branch">Branch / Major *</label>
                         <input id="branch" required maxlength="120"
-                               placeholder="e.g. Computer Engineering">
+                               placeholder="e.g. Computer Science Engineering">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div>
-                        <label for="graduationYear">Graduation year *</label>
+                        <label for="graduationYear">Graduation Year *</label>
                         <input id="graduationYear" type="number" required
-                               min="1950" max="2100" step="1" placeholder="2027">
+                               min="1950" max="2100" step="1" placeholder="2026">
                     </div>
                     <div>
                         <label for="cgpa">CGPA (0–10)</label>
                         <input id="cgpa" type="number" min="0" max="10"
-                               step="0.01" placeholder="8.50">
+                               step="0.01" placeholder="8.90">
                     </div>
                 </div>
 
                 <label for="skills">Skills *</label>
                 <textarea id="skills" required maxlength="2000"
-                          placeholder="Java, SQL, Spring Boot"></textarea>
+                          placeholder="e.g. Java, Spring Boot, MySQL, React"></textarea>
 
                 <div class="form-row">
                     <div>
@@ -102,20 +105,20 @@
                     </div>
                 </div>
 
-                <h3 class="form-section">3. Resume *</h3>
+                <h3 class="form-section">3. Resume Attachment *</h3>
                 <div id="resumeChoices"></div>
-                <label for="resumeFile">Upload a new resume (PDF, DOC or DOCX, max 5 MB)</label>
+                <label for="resumeFile">Or upload a new resume file (PDF, DOC, DOCX up to 5 MB)</label>
                 <input id="resumeFile" type="file"
                        accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
 
-                <h3 class="form-section">4. Cover letter *</h3>
-                <label for="coverLetter">Why are you a good fit? (50–3000 characters)</label>
-                <textarea id="coverLetter" rows="7" required minlength="50" maxlength="3000"
-                          placeholder="Tell the company about your experience and interest in this role."></textarea>
+                <h3 class="form-section">4. Cover Letter *</h3>
+                <label for="coverLetter">Why are you a standout fit for this role? (50–3000 characters)</label>
+                <textarea id="coverLetter" rows="6" required minlength="50" maxlength="3000"
+                          placeholder="Explain what excites you about this role, your key achievements, and what value you bring to the team."></textarea>
                 <small id="coverCount" class="char-count">0 / 3000</small>
 
                 <button id="submitApplication" class="primary-button full-button" type="submit">
-                    Submit application →
+                    Submit Application →
                 </button>
                 <p id="formMessage" class="status-message" role="status" aria-live="polite"></p>
             </form>
@@ -124,7 +127,16 @@
         <p id="pageMessage" class="status-message" role="status"></p>
     </main>
 
-    <script src="common.js?v=4"></script>
-    <script src="apply.js?v=4"></script>
+    <footer>
+        <a class="logo footer-logo" href="index.html">
+            <span class="logo-badge">CN</span>
+            Career<span>Nest</span>
+        </a>
+        <p>Connecting people with opportunities.</p>
+        <small>© CareerNest · Fast Application Gateway</small>
+    </footer>
+
+    <script src="common.js?v=5"></script>
+    <script src="apply.js?v=5"></script>
 </body>
 </html>

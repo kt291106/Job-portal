@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | CareerNest</title>
+    <link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+    <header class="navbar">
+        <a class="logo" href="index.html">
+            <span class="logo-badge">CN</span>
+            Career<span>Nest</span>
+        </a>
+        <nav>
+            <a href="index.html#jobs">All Jobs</a>
+            <a href="admin.html" class="active">Admin Control</a>
+        </nav>
+        <div class="nav-actions"></div>
+    </header>
+
+    <main class="page">
+        <div class="page-header">
+            <div>
+                <span class="eyebrow">SYSTEM GOVERNANCE</span>
+                <h1>Admin Control Panel</h1>
+                <p>Monitor platform statistics, moderate user accounts, manage organizations, and govern job listings.</p>
+            </div>
+            <button id="refreshAll" class="outline-button" type="button">↻ Refresh Data</button>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card"><strong id="statStudents">—</strong><span>Job Seekers</span></div>
+            <div class="stat-card"><strong id="statRecruiters">—</strong><span>Recruiters</span></div>
+            <div class="stat-card"><strong id="statCompanies">—</strong><span>Companies</span></div>
+            <div class="stat-card"><strong id="statJobs">—</strong><span>Jobs Listed</span></div>
+            <div class="stat-card"><strong id="statApplications">—</strong><span>Applications</span></div>
+        </div>
+
+        <p id="adminMessage" class="status-message" role="status"></p>
+
+        <div class="tabs">
+            <button class="filter-button active" data-tab="usersTab" type="button">👥 User Accounts</button>
+            <button class="filter-button" data-tab="companiesTab" type="button">🏢 Verified Companies</button>
+            <button class="filter-button" data-tab="jobsTab" type="button">💼 Moderated Jobs</button>
+        </div>
+
+        <section id="usersTab" class="tab-panel panel">
+            <h2>User Management</h2>
+            <p class="hint">Toggle account status or inspect registered candidate and recruiter profiles.</p>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Full Name</th>
+                            <th>Email Address</th>
+                            <th>Role</th>
+                            <th>Account Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTable"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="companiesTab" class="tab-panel panel" hidden>
+            <h2>Registered Companies</h2>
+            <p class="hint">Overview of registered employers, industries, and active recruiters.</p>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Company ID</th>
+                            <th>Company Name</th>
+                            <th>Industry</th>
+                            <th>Headquarters</th>
+                            <th>Recruiter Contact</th>
+                            <th>Total Jobs</th>
+                        </tr>
+                    </thead>
+                    <tbody id="companiesTable"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="jobsTab" class="tab-panel panel" hidden>
+            <h2>Job Listings Moderation</h2>
+            <p class="hint">Review live postings, track application counts, and publish or close listings.</p>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Job ID</th>
+                            <th>Job Title</th>
+                            <th>Company</th>
+                            <th>Listing Status</th>
+                            <th>Applicants</th>
+                            <th>Moderation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="jobsTable"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a class="logo footer-logo" href="index.html">
+            <span class="logo-badge">CN</span>
+            Career<span>Nest</span>
+        </a>
+        <p>Connecting people with opportunities.</p>
+        <small>© CareerNest · Governance Suite</small>
+    </footer>
+
+    <script src="common.js?v=5"></script>
+    <script src="admin.js?v=5"></script>
+</body>
+</html>

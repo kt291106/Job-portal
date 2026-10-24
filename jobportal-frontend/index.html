@@ -1,149 +1,180 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover jobs, internships and career opportunities.">
+    <meta name="description" content="CareerNest | Discover premier jobs, internships and high-growth career opportunities.">
     <title>CareerNest | Find Your Next Opportunity</title>
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
     <header class="navbar">
-        <a class="logo" href="#">Career<span>Nest</span></a>
+        <a class="logo" href="#home">
+            <span class="logo-badge">CN</span>
+            Career<span>Nest</span>
+        </a>
 
-<nav>
-    <a href="#home">Home</a>
-    <a href="#jobs">Find Jobs</a>
-    <a href="#post-job">For Employers</a>
-</nav>
+        <nav>
+            <a href="#home" class="active">Home</a>
+            <a href="#jobs">Find Jobs</a>
+            <a href="#post-job">For Employers</a>
+        </nav>
 
-<div class="nav-actions"></div>
+        <div class="nav-actions"></div>
+    </header>
 
-</header>
+    <!-- Quick Demo Accounts Helper Bar -->
+    <div class="demo-accounts-bar">
+        <span>💡 <strong>Quick Demo Access:</strong> Test any role in 1-click</span>
+        <div class="demo-pills">
+            <button class="demo-account-btn" type="button" onclick="quickLogin('STUDENT')">🎓 Job Seeker (Priya)</button>
+            <button class="demo-account-btn" type="button" onclick="quickLogin('RECRUITER')">🏢 Recruiter (Neha - TechNova)</button>
+            <button class="demo-account-btn" type="button" onclick="quickLogin('ADMIN')">🛡️ Admin Panel</button>
+        </div>
+    </div>
 
     <main>
         
-<!-- Login and Signup Section--- -->
-<section id="authSection" class="auth-section" hidden>
-    <div class="auth-card">
+        <!-- Login and Signup Section -->
+        <section id="authSection" class="auth-section" hidden>
+            <div class="auth-card">
 
-        <button id="closeAuthButton" class="auth-close"
-                type="button" aria-label="Close form">✕</button>
+                <button id="closeAuthButton" class="auth-close"
+                        type="button" aria-label="Close form">✕</button>
 
-        <a class="logo auth-logo" href="#home">Career<span>Nest</span></a>
+                <a class="logo auth-logo" href="#home">
+                    <span class="logo-badge">CN</span>
+                    Career<span>Nest</span>
+                </a>
 
-        <div class="auth-tabs">
-            <button id="loginTab" class="auth-tab active" type="button">
-                Login
-            </button>
-            <button id="signupTab" class="auth-tab" type="button">
-                Sign Up
-            </button>
-        </div>
+                <div class="auth-tabs">
+                    <button id="loginTab" class="auth-tab active" type="button">
+                        Login
+                    </button>
+                    <button id="signupTab" class="auth-tab" type="button">
+                        Sign Up
+                    </button>
+                </div>
 
-        <h2 id="authTitle">Welcome back!</h2>
-        <p id="authDescription">Login to continue your career journey.</p>
+                <h2 id="authTitle">Welcome back!</h2>
+                <p id="authDescription">Login to continue your career journey.</p>
 
-        <form id="authForm">
-            <div id="accountTypeGroup" class="account-type" hidden>
-                <span class="account-type-label">Choose your account type</span>
-                <label class="account-option">
-                    <input type="radio" name="accountType" value="STUDENT" checked>
-                    <span><strong>Job seeker</strong><small>Find jobs &amp; apply</small></span>
-                </label>
-                <label class="account-option">
-                    <input type="radio" name="accountType" value="COMPANY">
-                    <span><strong>Company</strong><small>Publish jobs &amp; see applicants</small></span>
-                </label>
+                <form id="authForm">
+                    <div id="accountTypeGroup" class="account-type" hidden>
+                        <span class="account-type-label">Choose your account type</span>
+                        <label class="account-option">
+                            <input type="radio" name="accountType" value="STUDENT" checked>
+                            <span><strong>Job seeker</strong><small>Find jobs &amp; apply</small></span>
+                        </label>
+                        <label class="account-option">
+                            <input type="radio" name="accountType" value="COMPANY">
+                            <span><strong>Company</strong><small>Publish jobs &amp; review applicants</small></span>
+                        </label>
+                    </div>
+
+                    <div id="fullNameGroup" hidden>
+                        <label for="authFullName" id="authFullNameLabel">Full name</label>
+                        <input id="authFullName" type="text"
+                               placeholder="Enter your full name"
+                               maxlength="120">
+                    </div>
+
+                    <div id="companyFields" class="company-fields" hidden>
+                        <label for="companyName">Company name *</label>
+                        <input id="companyName" type="text" maxlength="180"
+                               placeholder="e.g. TechNova Solutions">
+
+                        <label for="companyWebsite">Website</label>
+                        <input id="companyWebsite" type="url" maxlength="255"
+                               placeholder="https://example.com">
+
+                        <label for="companyIndustry">Industry</label>
+                        <input id="companyIndustry" type="text" maxlength="120"
+                               placeholder="e.g. Information Technology">
+
+                        <label for="companySize">Company size</label>
+                        <select id="companySize">
+                            <option value="">Select size</option>
+                            <option>1-10</option>
+                            <option>11-50</option>
+                            <option>51-200</option>
+                            <option>201-1000</option>
+                            <option>1000+</option>
+                        </select>
+
+                        <label for="companyHeadquarters">Headquarters</label>
+                        <input id="companyHeadquarters" type="text" maxlength="150"
+                               placeholder="e.g. Mumbai, Maharashtra">
+                    </div>
+
+                    <label for="authEmail">Email address</label>
+                    <input id="authEmail" type="email"
+                           placeholder="you@example.com" required>
+
+                    <label for="authPassword">Password</label>
+                    <input id="authPassword" type="password"
+                           placeholder="Enter your password"
+                           minlength="8" maxlength="72" required>
+
+                    <button id="authSubmitButton"
+                            class="primary-button full-button"
+                            type="submit">
+                        Login →
+                    </button>
+
+                    <!-- Quick Autofill for Reviewers/Users -->
+                    <div class="quick-logins-box">
+                        <strong>⚡ Quick Autofill Test Credentials</strong>
+                        <div class="quick-login-pills">
+                            <button type="button" class="quick-login-pill" onclick="document.getElementById('authEmail').value='priya@example.test'; document.getElementById('authPassword').value='Demo@12345';">Priya (Student)</button>
+                            <button type="button" class="quick-login-pill" onclick="document.getElementById('authEmail').value='neha@example.test'; document.getElementById('authPassword').value='Demo@12345';">Neha (Recruiter)</button>
+                            <button type="button" class="quick-login-pill" onclick="document.getElementById('authEmail').value='admin@careernest.local'; document.getElementById('authPassword').value='Admin@12345';">Admin</button>
+                        </div>
+                    </div>
+
+                    <p id="authMessage" class="status-message"
+                       role="status" aria-live="polite"></p>
+                </form>
+
+                <p class="auth-switch">
+                    <span id="authSwitchText">New to CareerNest?</span>
+                    <button id="authSwitchButton" type="button">Create account</button>
+                </p>
+
             </div>
+        </section>
+        <!-- End Login and Signup Section -->
 
-            <div id="fullNameGroup" hidden>
-                <label for="authFullName" id="authFullNameLabel">Full name</label>
-                <input id="authFullName" type="text"
-                       placeholder="Enter your full name"
-                       maxlength="120">
-            </div>
-
-            <div id="companyFields" class="company-fields" hidden>
-                <label for="companyName">Company name *</label>
-                <input id="companyName" type="text" maxlength="180"
-                       placeholder="e.g. TechNova Solutions">
-
-                <label for="companyWebsite">Website</label>
-                <input id="companyWebsite" type="url" maxlength="255"
-                       placeholder="https://example.com">
-
-                <label for="companyIndustry">Industry</label>
-                <input id="companyIndustry" type="text" maxlength="120"
-                       placeholder="e.g. Information Technology">
-
-                <label for="companySize">Company size</label>
-                <select id="companySize">
-                    <option value="">Select size</option>
-                    <option>1-10</option>
-                    <option>11-50</option>
-                    <option>51-200</option>
-                    <option>201-1000</option>
-                    <option>1000+</option>
-                </select>
-
-                <label for="companyHeadquarters">Headquarters</label>
-                <input id="companyHeadquarters" type="text" maxlength="150"
-                       placeholder="e.g. Mumbai">
-            </div>
-
-            <label for="authEmail">Email address</label>
-            <input id="authEmail" type="email"
-                   placeholder="you@example.com" required>
-
-            <label for="authPassword">Password</label>
-            <input id="authPassword" type="password"
-                   placeholder="Enter your password"
-                   minlength="8" maxlength="72" required>
-
-            <button id="authSubmitButton"
-                    class="primary-button full-button"
-                    type="submit">
-                Login →
-            </button>
-
-            <p id="authMessage" class="status-message"
-               role="status" aria-live="polite"></p>
-        </form>
-
-        <p class="auth-switch">
-            <span id="authSwitchText">New to CareerNest?</span>
-            <button id="authSwitchButton" type="button">Create account</button>
-        </p>
-
-    </div>
-</section>
-<!-- End Login and Signup Section -->
-
-
+        <!-- Hero Section -->
         <section class="hero" id="home">
             <div class="hero-content">
-                <span class="eyebrow">YOUR NEXT CHAPTER STARTS HERE</span>
+                <span class="eyebrow">✨ YOUR NEXT CHAPTER STARTS HERE</span>
 
-                <h1>Find work that<br> <span>moves you forward.</span></h1>
+                <h1>Find work that<br> <span class="gradient-text">moves you forward.</span></h1>
 
                 <p>
-                    Explore exciting jobs, discover new opportunities,
-                    and take the next step in your career.
+                    Explore verified career opportunities, premium internships, and full-time roles at leading tech companies and innovative startups.
                 </p>
 
                 <form id="searchForm" class="search-box">
                     <div class="search-field">
                         <label for="searchInput">What are you looking for?</label>
                         <input id="searchInput" type="text"
-                               placeholder="Job title, skill or location">
+                               placeholder="Role, skill (e.g. Java, React, SQL) or location">
                     </div>
                     <button class="primary-button" type="submit">Find Jobs →</button>
                 </form>
 
-                <p class="hero-note">Explore internships, full-time roles and more.</p>
+                <div class="hero-tags">
+                    <span class="hero-tag" onclick="document.getElementById('searchInput').value='Developer'; displayJobs();">💼 Developer</span>
+                    <span class="hero-tag" onclick="document.getElementById('searchInput').value='Intern'; displayJobs();">🎓 Internships</span>
+                    <span class="hero-tag" onclick="document.getElementById('searchInput').value='Remote'; displayJobs();">🌐 Remote</span>
+                    <span class="hero-tag" onclick="document.getElementById('searchInput').value='Design'; displayJobs();">🎨 Design</span>
+                    <span class="hero-tag" onclick="document.getElementById('searchInput').value='Java'; displayJobs();">☕ Java</span>
+                </div>
+
+                <p class="hero-note">✓ Verified Companies &nbsp;·&nbsp; ✓ Free Applications &nbsp;·&nbsp; ✓ Instant Resume Matching</p>
             </div>
 
             <div class="hero-art" aria-hidden="true">
@@ -151,42 +182,48 @@
                 <div class="floating-card card-one">
                     <span class="card-icon">💼</span>
                     <div>
-                        <strong>New opportunities</strong>
-                        <small>Your next role awaits</small>
+                        <strong>New Opportunities</strong>
+                        <small>50+ active positions</small>
                     </div>
                 </div>
                 <div class="floating-card card-two">
                     <span class="check-icon">✓</span>
                     <div>
-                        <strong>Career growth</strong>
-                        <small>One step at a time</small>
+                        <strong>Profile Matched</strong>
+                        <small>Direct recruiter contact</small>
                     </div>
                 </div>
                 <div class="art-center">CN</div>
             </div>
         </section>
 
+        <!-- Stats Section -->
         <section class="stats">
             <div>
                 <strong id="totalJobs">—</strong>
-                <span>Jobs available</span>
+                <span>Jobs Available</span>
             </div>
             <div>
-                <strong>Career</strong>
-                <span>Opportunities for you</span>
+                <strong>100%</strong>
+                <span>Verified Employers</span>
             </div>
             <div>
-                <strong>One step</strong>
-                <span>Closer to your goals</span>
+                <strong>₹35k – ₹18L</strong>
+                <span>Competitive Packages</span>
+            </div>
+            <div>
+                <strong>1-Click</strong>
+                <span>Streamlined Applications</span>
             </div>
         </section>
 
+        <!-- Jobs Listing Section -->
         <section class="jobs-section" id="jobs">
             <div class="section-heading">
                 <div>
-                    <span class="eyebrow">OPPORTUNITIES FOR YOU</span>
-                    <h2>Explore latest jobs</h2>
-                    <p>Find a role that matches your skills and ambitions.</p>
+                    <span class="eyebrow">FEATURED OPPORTUNITIES</span>
+                    <h2>Explore Latest Jobs</h2>
+                    <p>Discover roles matched to your expertise, ambitions, and preferred work mode.</p>
                 </div>
                 <button id="refreshButton" class="outline-button" type="button">
                     ↻ Refresh jobs
@@ -202,29 +239,38 @@
             </div>
 
             <p id="jobsMessage" class="status-message" role="status">
-                Connecting to the job database...
+                Loading available opportunities...
             </p>
 
             <div id="jobList" class="job-grid"></div>
         </section>
 
+        <!-- For Employers Section -->
         <section class="post-section" id="post-job">
             <div class="post-intro">
-                <span class="eyebrow">FOR EMPLOYERS</span>
+                <span class="eyebrow">FOR EMPLOYERS &amp; HIRING TEAMS</span>
                 <h2>Find your next great hire.</h2>
                 <p>
-                    Register your company to publish jobs and review
-                    everyone who applies, with their full profile and resume.
+                    Register your company to publish open positions, screen top-tier candidates, review comprehensive profiles, and download formatted resumes seamlessly.
                 </p>
-                <div class="post-benefit">✓ Only registered companies can publish jobs</div>
-                <div class="post-benefit">✓ See applicant details and resumes</div>
-                <div class="post-benefit">✓ Shortlist, interview or reject in one click</div>
+                <div class="post-benefit">
+                    <span class="post-benefit-check">✓</span>
+                    <span>Only verified companies can publish open roles</span>
+                </div>
+                <div class="post-benefit">
+                    <span class="post-benefit-check">✓</span>
+                    <span>Inspect applicant education, skills, and PDF resumes</span>
+                </div>
+                <div class="post-benefit">
+                    <span class="post-benefit-check">✓</span>
+                    <span>Shortlist, advance to interview, or make offers in 1-click</span>
+                </div>
             </div>
 
             <div class="job-form employer-cta" id="employerGuest">
-                <h3>Hiring?</h3>
+                <h3>Looking for talent?</h3>
                 <p class="form-description">
-                    Create a company account, or log in to your company dashboard.
+                    Create a company account in seconds, or sign in to your recruiter dashboard.
                 </p>
                 <button id="employerSignupButton" class="primary-button full-button" type="button">
                     Register your company →
@@ -237,30 +283,34 @@
             <div class="job-form employer-cta" id="employerCompany" hidden>
                 <h3 id="employerCompanyName">Your company</h3>
                 <p class="form-description">
-                    Publish a new job or review the people who applied to your jobs.
+                    Manage your listings or review candidates who applied for your roles.
                 </p>
                 <a class="primary-button full-button" href="company.html#post">Post a new job →</a>
                 <a class="outline-button full-button" href="company.html#applicants">View applicants</a>
             </div>
         </section>
 
+        <!-- Bottom CTA Section -->
         <section class="bottom-cta">
             <div>
-                <span class="eyebrow">YOUR FUTURE IS WAITING</span>
+                <span class="eyebrow">ACCELERATE YOUR CAREER</span>
                 <h2>Ready for your next opportunity?</h2>
-                <p>Explore the latest jobs and find your next step.</p>
+                <p>Discover internships and high-impact roles designed for your aspirations.</p>
             </div>
             <a href="#jobs" class="light-button">Explore jobs ↑</a>
         </section>
     </main>
 
     <footer>
-        <a class="logo footer-logo" href="#home">Career<span>Nest</span></a>
-        <p>Connecting people with opportunities.</p>
-        <small>CareerNest · Learning project</small>
+        <a class="logo footer-logo" href="#home">
+            <span class="logo-badge">CN</span>
+            Career<span>Nest</span>
+        </a>
+        <p>Empowering careers and connecting talent with industry leaders.</p>
+        <small>© CareerNest · Full-Stack Career Portal · Designed with modern Light Pink Aesthetics</small>
     </footer>
 
-    <script src="common.js?v=4"></script>
-    <script src="script.js?v=4"></script>
+    <script src="common.js?v=5"></script>
+    <script src="script.js?v=5"></script>
 </body>
 </html>

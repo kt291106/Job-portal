@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile | CareerNest</title>
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
     <header class="navbar">
-        <a class="logo" href="index.html">Career<span>Nest</span></a>
+        <a class="logo" href="index.html">
+            <span class="logo-badge">CN</span>
+            Career<span>Nest</span>
+        </a>
         <nav>
             <a href="index.html#jobs">Find Jobs</a>
-            <a href="profile.html">My Profile</a>
+            <a href="profile.html" class="active">My Profile</a>
         </nav>
         <div class="nav-actions"></div>
     </header>
@@ -19,9 +22,9 @@
     <main class="page">
         <div class="page-header">
             <div>
-                <span class="eyebrow">JOB SEEKER</span>
-                <h1 id="profileHeading">My profile</h1>
-                <p>Employers see these details when you apply for their jobs.</p>
+                <span class="eyebrow">JOB SEEKER DASHBOARD</span>
+                <h1 id="profileHeading">My Profile</h1>
+                <p>Employers view these credentials and resume whenever you apply for jobs.</p>
             </div>
             <a class="outline-button" href="index.html#jobs">Browse jobs →</a>
         </div>
@@ -30,101 +33,115 @@
 
         <div class="two-columns">
             <form id="profileForm" class="panel job-form" novalidate>
-                <h2>Personal &amp; education details</h2>
-                <p class="hint">Fields marked * are required before you can apply.</p>
+                <h2>Personal &amp; Academic Details</h2>
+                <p class="hint">Fields marked with an asterisk (*) are required to apply for jobs.</p>
 
                 <div class="form-row">
                     <div>
-                        <label for="fullName">Full name</label>
+                        <label for="fullName">Full Name</label>
                         <input id="fullName" disabled>
                     </div>
                     <div>
-                        <label for="email">Email</label>
+                        <label for="email">Email Address</label>
                         <input id="email" disabled>
                     </div>
                 </div>
 
-                <label for="phone">Phone number *</label>
+                <label for="phone">Phone Number *</label>
                 <input id="phone" required inputmode="tel" maxlength="16"
-                       pattern="\+?[0-9]{10,15}" placeholder="9876543210">
+                       pattern="\+?[0-9]{10,15}" placeholder="e.g. 9876543210">
 
-                <label for="collegeName">College name *</label>
+                <label for="collegeName">College / University Name *</label>
                 <input id="collegeName" required maxlength="180"
-                       placeholder="e.g. Example Engineering College">
+                       placeholder="e.g. National Institute of Technology">
 
                 <div class="form-row">
                     <div>
                         <label for="degree">Degree *</label>
-                        <input id="degree" required maxlength="120" placeholder="e.g. B.E.">
+                        <input id="degree" required maxlength="120" placeholder="e.g. B.Tech / B.E. / MCA">
                     </div>
                     <div>
-                        <label for="branch">Branch / major *</label>
+                        <label for="branch">Branch / Major *</label>
                         <input id="branch" required maxlength="120"
-                               placeholder="e.g. Computer Engineering">
+                               placeholder="e.g. Computer Science Engineering">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div>
-                        <label for="graduationYear">Graduation year *</label>
+                        <label for="graduationYear">Graduation Year *</label>
                         <input id="graduationYear" type="number" required
-                               min="1950" max="2100" step="1" placeholder="2027">
+                               min="1950" max="2100" step="1" placeholder="2026">
                     </div>
                     <div>
-                        <label for="cgpa">CGPA (0–10)</label>
+                        <label for="cgpa">CGPA (0–10 Scale)</label>
                         <input id="cgpa" type="number" min="0" max="10"
-                               step="0.01" placeholder="8.50">
+                               step="0.01" placeholder="8.90">
                     </div>
                 </div>
 
-                <label for="skills">Skills *</label>
+                <label for="skills">Technical &amp; Soft Skills *</label>
                 <textarea id="skills" required maxlength="2000"
-                          placeholder="Java, SQL, Spring Boot"></textarea>
+                          placeholder="e.g. Java, Spring Boot, MySQL, React, Python, Git"></textarea>
 
-                <label for="linkedinUrl">LinkedIn URL</label>
-                <input id="linkedinUrl" type="url" maxlength="255"
-                       placeholder="https://linkedin.com/in/your-name">
-
-                <label for="githubUrl">GitHub URL</label>
-                <input id="githubUrl" type="url" maxlength="255"
-                       placeholder="https://github.com/your-name">
+                <div class="form-row">
+                    <div>
+                        <label for="linkedinUrl">LinkedIn Profile URL</label>
+                        <input id="linkedinUrl" type="url" maxlength="255"
+                               placeholder="https://linkedin.com/in/your-name">
+                    </div>
+                    <div>
+                        <label for="githubUrl">GitHub Profile URL</label>
+                        <input id="githubUrl" type="url" maxlength="255"
+                               placeholder="https://github.com/your-name">
+                    </div>
+                </div>
 
                 <button id="saveProfileButton" class="primary-button full-button" type="submit">
-                    Save profile
+                    Save Profile Details
                 </button>
                 <p id="profileMessage" class="status-message" role="status"></p>
             </form>
 
             <div>
                 <section class="panel job-form">
-                    <h2>Resumes</h2>
-                    <p class="hint">PDF, DOC or DOCX, up to 5 MB. You can keep up to 5 resumes.</p>
+                    <h2>Resumes &amp; Documents</h2>
+                    <p class="hint">Upload PDF, DOC or DOCX (up to 5 MB). You can store up to 5 resumes.</p>
 
                     <div id="resumeList"></div>
 
                     <form id="resumeForm">
-                        <label for="resumeFile">Upload a resume</label>
+                        <label for="resumeFile">Upload a New Resume</label>
                         <input id="resumeFile" type="file" required
                                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                         <button id="uploadButton" class="primary-button full-button" type="submit">
-                            Upload resume
+                            Upload Resume →
                         </button>
                         <p id="resumeMessage" class="status-message" role="status"></p>
                     </form>
                 </section>
 
                 <section class="panel" id="applications">
-                    <h2>My applications</h2>
-                    <p class="hint">Status updates from companies appear here.</p>
+                    <h2>My Applications</h2>
+                    <p class="hint">Live status updates from employers appear here.</p>
                     <div id="applicationList">
-                        <p class="status-message">Loading...</p>
+                        <p class="status-message">Loading your applications...</p>
                     </div>
                 </section>
             </div>
         </div>
     </main>
 
-    <script src="common.js?v=4"></script>
-    <script src="profile.js?v=4"></script>
+    <footer>
+        <a class="logo footer-logo" href="index.html">
+            <span class="logo-badge">CN</span>
+            Career<span>Nest</span>
+        </a>
+        <p>Connecting ambition with opportunity.</p>
+        <small>© CareerNest · Candidate Hub</small>
+    </footer>
+
+    <script src="common.js?v=5"></script>
+    <script src="profile.js?v=5"></script>
 </body>
 </html>

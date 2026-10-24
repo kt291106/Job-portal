@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Dashboard | CareerNest</title>
+    <link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+    <header class="navbar">
+        <a class="logo" href="index.html">
+            <span class="logo-badge">CN</span>
+            Career<span>Nest</span>
+        </a>
+        <nav>
+            <a href="index.html#jobs">All Jobs</a>
+            <a href="company.html" class="active">Company Dashboard</a>
+        </nav>
+        <div class="nav-actions"></div>
+    </header>
+
+    <main class="page">
+        <div class="page-header">
+            <div>
+                <span class="eyebrow">EMPLOYER PORTAL</span>
+                <h1 id="companyHeading">Your Company</h1>
+                <p>Publish job openings, review applicants, evaluate resumes, and manage candidates.</p>
+            </div>
+            <a class="primary-button" href="#post" onclick="showTab('postTab')">+ Post a New Job</a>
+        </div>
+
+        <div class="tabs">
+            <button class="filter-button active" data-tab="applicantsTab" type="button">📋 Applicants</button>
+            <button class="filter-button" data-tab="jobsTab" type="button">💼 Published Jobs</button>
+            <button class="filter-button" data-tab="postTab" type="button">➕ Post a Job</button>
+            <button class="filter-button" data-tab="companyTab" type="button">🏢 Company Profile</button>
+        </div>
+
+        <!-- Applicants Tab -->
+        <section id="applicantsTab" class="tab-panel">
+            <div class="panel">
+                <div class="page-header" style="margin-bottom: 12px;">
+                    <div>
+                        <h2 id="applicantsTitle">Applicants</h2>
+                        <p class="status-message" id="applicantsMessage">Loading applicants...</p>
+                    </div>
+                    <div class="list-actions">
+                        <select id="jobFilter" class="small-button" aria-label="Filter by job">
+                            <option value="">All my jobs</option>
+                        </select>
+                        <button id="refreshApplicants" class="small-button" type="button">↻ Refresh</button>
+                    </div>
+                </div>
+                <div id="applicantsList"></div>
+            </div>
+        </section>
+
+        <!-- Published Jobs Tab -->
+        <section id="jobsTab" class="tab-panel" hidden>
+            <div class="panel">
+                <div class="page-header" style="margin-bottom: 12px;">
+                    <div>
+                        <h2>Published Jobs</h2>
+                        <p class="status-message" id="jobsMessage">Loading jobs...</p>
+                    </div>
+                    <button id="refreshJobs" class="small-button" type="button">↻ Refresh</button>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Job Title</th>
+                                <th>Type</th>
+                                <th>Deadline</th>
+                                <th>Status</th>
+                                <th>Applicants</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jobsTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Post a Job Tab -->
+        <section id="postTab" class="tab-panel" hidden>
+            <form id="jobForm" class="panel job-form" novalidate>
+                <h2>Publish a New Job Opportunity</h2>
+                <p class="hint">The role will be published under your company name and will immediately appear on the home page. Fields marked with an asterisk (*) are required.</p>
+
+                <label for="title">Job Title *</label>
+                <input id="title" required maxlength="180" placeholder="e.g. Senior Java Full Stack Engineer">
+
+                <label for="description">Role Overview &amp; Responsibilities *</label>
+                <textarea id="description" required maxlength="10000" rows="5"
+                          placeholder="Describe the role, day-to-day responsibilities, and team culture."></textarea>
+
+                <label for="requirements">Candidate Requirements</label>
+                <textarea id="requirements" maxlength="5000" rows="3"
+                          placeholder="Education, prior work experience, or key technical proficiencies."></textarea>
+
+                <label for="skills">Skills Required</label>
+                <input id="skills" maxlength="2000" placeholder="e.g. Java, Spring Boot, React, MySQL, AWS">
+
+                <div class="form-row">
+                    <div>
+                        <label for="location">Location *</label>
+                        <input id="location" required maxlength="150" placeholder="e.g. Bengaluru / Remote">
+                    </div>
+                    <div>
+                        <label for="openings">Open Positions *</label>
+                        <input id="openings" type="number" min="1" max="10000"
+                               step="1" value="1" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="employmentType">Employment Type *</label>
+                        <select id="employmentType" required>
+                            <option value="FULL_TIME">Full Time</option>
+                            <option value="INTERNSHIP">Internship</option>
+                            <option value="PART_TIME">Part Time</option>
+                            <option value="CONTRACT">Contract</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="workMode">Work Mode *</label>
+                        <select id="workMode" required>
+                            <option value="HYBRID">Hybrid</option>
+                            <option value="ONSITE">Onsite</option>
+                            <option value="REMOTE">Remote</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="salaryMin">Minimum Annual CTC / Monthly Stipend (₹)</label>
+                        <input id="salaryMin" type="number" min="0" step="1000" placeholder="e.g. 800000">
+                    </div>
+                    <div>
+                        <label for="salaryMax">Maximum Annual CTC / Monthly Stipend (₹)</label>
+                        <input id="salaryMax" type="number" min="0" step="1000" placeholder="e.g. 1400000">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="experienceMin">Minimum Experience (Years)</label>
+                        <input id="experienceMin" type="number" min="0" max="40" step="1" value="0">
+                    </div>
+                    <div>
+                        <label for="deadline">Application Deadline</label>
+                        <input id="deadline" type="date">
+                    </div>
+                </div>
+
+                <button id="submitJobButton" class="primary-button full-button" type="submit">
+                    Publish Job Opening →
+                </button>
+                <p id="formMessage" class="status-message" role="status"></p>
+            </form>
+        </section>
+
+        <!-- Company Profile Tab -->
+        <section id="companyTab" class="tab-panel" hidden>
+            <form id="companyForm" class="panel job-form" novalidate>
+                <h2>Company Profile &amp; Branding</h2>
+                <p class="hint">Information here appears on your job listings to introduce candidates to your organization.</p>
+
+                <label for="cName">Company Name *</label>
+                <input id="cName" required maxlength="180" placeholder="e.g. TechNova Solutions">
+
+                <label for="cWebsite">Official Website</label>
+                <input id="cWebsite" type="url" maxlength="255" placeholder="https://example.com">
+
+                <div class="form-row">
+                    <div>
+                        <label for="cIndustry">Industry</label>
+                        <input id="cIndustry" maxlength="120" placeholder="e.g. Information Technology">
+                    </div>
+                    <div>
+                        <label for="cSize">Company Size</label>
+                        <select id="cSize">
+                            <option value="">Select size</option>
+                            <option>1-10</option>
+                            <option>11-50</option>
+                            <option>51-200</option>
+                            <option>201-1000</option>
+                            <option>1000+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label for="cHeadquarters">Headquarters Location</label>
+                <input id="cHeadquarters" maxlength="150" placeholder="e.g. Bengaluru, Karnataka">
+
+                <label for="cDescription">About the Company</label>
+                <textarea id="cDescription" rows="4" maxlength="5000"
+                          placeholder="Brief summary of mission, products, and engineering culture."></textarea>
+
+                <button id="saveCompanyButton" class="primary-button full-button" type="submit">
+                    Save Company Profile
+                </button>
+                <p id="companyMessage" class="status-message" role="status"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <a class="logo footer-logo" href="index.html">
+            <span class="logo-badge">CN</span>
+            Career<span>Nest</span>
+        </a>
+        <p>Empowering recruiters and talent partners worldwide.</p>
+        <small>© CareerNest · Employer Command Center</small>
+    </footer>
+
+    <script src="common.js?v=5"></script>
+    <script src="company.js?v=5"></script>
+</body>
+</html>
